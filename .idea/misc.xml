@@ -5,6 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/1.Creational/factoryDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/builderDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/1.Creational/builderDesign/pom.xml" />
       </list>
     </option>
   </component>
