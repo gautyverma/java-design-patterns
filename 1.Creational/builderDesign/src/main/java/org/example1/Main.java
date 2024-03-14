@@ -1,4 +1,4 @@
-package org.example;
+package org.example1;
 
 class Phone {
   private String os;
