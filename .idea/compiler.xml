@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="builderDesign" />
         <module name="adapterDesign" />
+        <module name="compositeDesign" />
         <module name="factoryDesign" />
       </profile>
     </annotationProcessing>

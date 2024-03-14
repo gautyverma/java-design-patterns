@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/builderDesign/pom.xml" />
         <option value="$PROJECT_DIR$/1.Creational/builderDesign/pom.xml" />
         <option value="$PROJECT_DIR$/2.Structural/adapterDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2.Structural/compositeDesign/pom.xml" />
       </list>
     </option>
   </component>
