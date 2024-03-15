@@ -9,9 +9,10 @@
         <module name="builderDesign" />
         <module name="prototypeDesign" />
         <module name="observerDesign" />
-        <module name="adapterDesign" />
-        <module name="compositeDesign" />
         <module name="factoryDesign" />
+        <module name="adapterDesign" />
+        <module name="singletonDesign" />
+        <module name="compositeDesign" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/2.Structural/compositeDesign/pom.xml" />
         <option value="$PROJECT_DIR$/1.Creational/prototypeDesign/pom.xml" />
         <option value="$PROJECT_DIR$/3.Behavioral/observerDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/singletonDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/1.Creational/singletonDesign/pom.xml" />
       </list>
     </option>
   </component>
