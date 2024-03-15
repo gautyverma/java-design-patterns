@@ -8,10 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="builderDesign" />
         <module name="prototypeDesign" />
+        <module name="observerDesign" />
         <module name="adapterDesign" />
         <module name="compositeDesign" />
         <module name="factoryDesign" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="prototypeDesign (1)" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>
