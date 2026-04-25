@@ -5,3 +5,4 @@
 4. Now I added more functionlity like UPI and wallet which can use pay method but these are not card, so I created an
    interface Payment and implemented it in UPI and Wallet class. and as well make changes in creditCard class and debit
    card class to implement Payment interface and implement pay method.
+5. If I add more payment method like wallet then I could easily implement it by creating a new class and implementing Payment interface and implementing pay method.
