@@ -10,6 +10,7 @@
         <module name="prototypeDesign" />
         <module name="observerDesign" />
         <module name="factoryDesign" />
+        <module name="design-patterns-2026" />
         <module name="adapterDesign" />
         <module name="singletonDesign" />
         <module name="compositeDesign" />

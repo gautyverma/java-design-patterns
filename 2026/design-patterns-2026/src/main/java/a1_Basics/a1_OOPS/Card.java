@@ -1,6 +1,6 @@
 package a1_Basics.a1_OOPS;
 
-abstract public class Card {
+public abstract class Card implements PaymentMethod {
   private String cardNumber;
   private String cardHolderName;
 
@@ -25,5 +25,4 @@ abstract public class Card {
     this.cardHolderName = cardHolderName;
   }
 
-  abstract void pay();
 }
