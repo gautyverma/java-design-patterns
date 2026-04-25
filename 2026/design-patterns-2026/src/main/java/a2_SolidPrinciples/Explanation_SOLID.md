@@ -2,18 +2,20 @@
 
 ## Overview
 
-| Principle | Full Name | Purpose |
-|-----------|-----------|---------|
-| **S** | Single Responsibility Principle (SRP) | One reason to change |
-| **O** | Open/Closed Principle (OCP) | Open for extension, closed for modification |
-| **L** | Liskov Substitution Principle (LSP) | Subtypes must be substitutable |
-| **I** | Interface Segregation Principle (ISP) | Many client-specific interfaces |
-| **D** | Dependency Inversion Principle (DIP) | Depend on abstractions, not concretions |
-
+| Principle | Full Name                             | Purpose                                     |
+|-----------|---------------------------------------|---------------------------------------------|
+| **S**     | Single Responsibility Principle (SRP) | One reason to change                        |
+| **O**     | Open/Closed Principle (OCP)           | Open for extension, closed for modification |
+| **L**     | Liskov Substitution Principle (LSP)   | Subtypes must be substitutable              |
+| **I**     | Interface Segregation Principle (ISP) | Many client-specific interfaces             |
+| **D**     | Dependency Inversion Principle (DIP)  | Depend on abstractions, not concretions     |
 
 ---
+
 ## **Single Responsibility Principle (SRP)**
+
 ### What is SRP?
+
 A class should have **only one reason to change** - meaning only one responsibility or job.
 
 ### Bad Implementation (Violates SRP)
@@ -84,7 +86,8 @@ public class EmailService {
 ## 2. Open/Closed Principle (OCP)
 
 ### Definition
-> A class should be **open for extension** but **closed for modification**. 
+
+> A class should be **open for extension** but **closed for modification**.
 > Add new functionality through extension (inheritance/composition) without modifying existing code.
 
 ### ❌ Bad Implementation (Violates OCP)
@@ -92,29 +95,31 @@ public class EmailService {
 **Problem:** Must modify the existing method to add new payment types
 
 **PaymentProcessor.java** — Hard-coded conditionals:
+
 ```java
 public class PaymentProcessor {
-  /**
-   * Issue: Adding new payment types [UPI...] requires modifying this method,
-   * which violates OCP. This can lead to bugs and maintenance issues.
-   */
-  public void processPayment(String paymentType, double amount) {
-    if (paymentType.equals("CreditCard")) {
-      System.out.println("Processing credit card payment of amount: " + amount);
-    } else if (paymentType.equals("DebitCard")) {
-      System.out.println("Processing DebitCard payment of amount: " + amount);
-    } else if (paymentType.equals("PayPal")) {
-      System.out.println("Processing PayPal payment of amount: " + amount);
-    } else {
-      throw new IllegalArgumentException("Unsupported payment type: " + paymentType);
+    /**
+     * Issue: Adding new payment types [UPI...] requires modifying this method,
+     * which violates OCP. This can lead to bugs and maintenance issues.
+     */
+    public void processPayment(String paymentType, double amount) {
+        if (paymentType.equals("CreditCard")) {
+            System.out.println("Processing credit card payment of amount: " + amount);
+        } else if (paymentType.equals("DebitCard")) {
+            System.out.println("Processing DebitCard payment of amount: " + amount);
+        } else if (paymentType.equals("PayPal")) {
+            System.out.println("Processing PayPal payment of amount: " + amount);
+        } else {
+            throw new IllegalArgumentException("Unsupported payment type: " + paymentType);
+        }
     }
-  }
 }
 ```
 
 ## ✅ Good Implementation (Follows OCP)
 
 ### 💡 Approach
+
 - Use **interface (abstraction)**
 - Add new behavior via **new classes**
 - No modification to existing code
@@ -122,6 +127,7 @@ public class PaymentProcessor {
 ---
 
 ### Step 1: Create Interface
+
 ```java
 public interface Payment {
     void pay(double amount);
@@ -129,26 +135,29 @@ public interface Payment {
 ```
 
 ### Step 2: Implement Payment Types
+
 ```java 
 public class CreditCardPayment implements Payment {
-public void pay(double amount) {
-System.out.println("Processing credit card payment: " + amount);
-}
+    public void pay(double amount) {
+        System.out.println("Processing credit card payment: " + amount);
+    }
 }
 
 public class DebitCardPayment implements Payment {
-public void pay(double amount) {
-System.out.println("Processing debit card payment: " + amount);
-}
+    public void pay(double amount) {
+        System.out.println("Processing debit card payment: " + amount);
+    }
 }
 
 public class PayPalPayment implements Payment {
-public void pay(double amount) {
-System.out.println("Processing PayPal payment: " + amount);
-}
+    public void pay(double amount) {
+        System.out.println("Processing PayPal payment: " + amount);
+    }
 }
 ```
+
 ### Step 3: Use Abstraction in Processor
+
 ```java
 public class PaymentProcessor {
 
@@ -157,20 +166,123 @@ public class PaymentProcessor {
     }
 }
 ```
+
 #### Usage
+
 ```java 
 Payment payment = new CreditCardPayment();
 PaymentProcessor processor = new PaymentProcessor();
-processor.processPayment(payment, 1000);
+processor.
+
+processPayment(payment, 1000);
 ```
+
 ### Extend Without Modification
+
 ```java
 public class UpiPayment implements Payment {
-public void pay(double amount) {
-System.out.println("Processing UPI payment: " + amount);
-}
+    public void pay(double amount) {
+        System.out.println("Processing UPI payment: " + amount);
+    }
 }
 ```
+
 ### Key Idea
+
 Add new classes → NO change in existing code
 Achieves true Open for Extension, Closed for Modification
+
+---
+
+## **Liskov Substitution Principle (LSP)**
+
+### What is LSP?
+
+Objects of a superclass should be replaceable with objects of its subclasses **without breaking the application**.
+
+In simple terms:  
+👉 If class **B** is a subtype of class **A**, then we should be able to use **B** anywhere we use **A** without
+unexpected behavior.
+
+---
+
+### Bad Implementation (Violates LSP)
+
+**BadImpl/Bird.java**
+
+    public class Bird {
+        public void fly() {
+            System.out.println("Bird is flying");
+        }
+    }
+
+**BadImpl/Ostrich.java**
+
+    public class Ostrich extends Bird {
+        @Override
+        public void fly() {
+            throw new UnsupportedOperationException("Ostrich can't fly");
+        }
+    }
+
+**Usage**
+
+    public class Main {
+        public static void main(String[] args) {
+            Bird bird = new Ostrich();
+            bird.fly(); // Runtime error ❌
+        }
+    }
+
+**Problems:**
+
+- Subclass changes expected behavior
+- Breaks polymorphism
+- Causes runtime errors
+- Violates trust in inheritance
+
+---
+
+### Good Implementation (Follows LSP)
+
+### Class Hierarchy (Good Design)
+
+    Bird (abstract)
+    ├── FlyingBird (abstract)
+    │     └── Sparrow
+    └── Ostrich
+
+**GoodImpl/Bird.java**
+
+    public abstract class Bird {
+    }
+
+**GoodImpl/FlyingBird.java**
+
+    public abstract class FlyingBird extends Bird {
+        public void fly() {
+            System.out.println("Flying...");
+        }
+    }
+
+**GoodImpl/Sparrow.java**
+
+    public class Sparrow extends FlyingBird {
+    }
+
+**GoodImpl/Ostrich.java**
+
+    public class Ostrich extends Bird {
+        // No fly method ✅
+    }
+
+**Usage**
+
+    public class Main {
+        public static void main(String[] args) {
+            FlyingBird bird = new Sparrow();
+            bird.fly(); // Works fine ✅
+        }
+    }
+
+---

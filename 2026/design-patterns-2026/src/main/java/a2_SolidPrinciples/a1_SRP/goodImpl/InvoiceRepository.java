@@ -1,4 +1,4 @@
-package a2_SolidPrinciples.a1_SRP.GoodImpl;
+package a2_SolidPrinciples.a1_SRP.goodImpl;
 
 public class InvoiceRepository {
   public void saveToDatabase() {

@@ -1,4 +1,4 @@
-package a2_SolidPrinciples.a1_SRP.BadImpl;
+package a2_SolidPrinciples.a1_SRP.badImpl;
 
 public class Invoice {
 
