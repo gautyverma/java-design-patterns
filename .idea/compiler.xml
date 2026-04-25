@@ -16,6 +16,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="0_OOPS" target="23" />
       <module name="prototypeDesign (1)" target="20" />
     </bytecodeTargetLevel>
   </component>

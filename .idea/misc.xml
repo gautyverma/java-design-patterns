@@ -13,10 +13,24 @@
         <option value="$PROJECT_DIR$/3.Behavioral/observerDesign/pom.xml" />
         <option value="$PROJECT_DIR$/singletonDesign/pom.xml" />
         <option value="$PROJECT_DIR$/1.Creational/singletonDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2026/1.Basics/0_OOPS/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/1.Creational/builderDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/1.Creational/factoryDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/1.Creational/singletonDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/1.Creational/prototypeDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/2.Structural/compositeDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/2.Structural/adapterDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2024/3.Behavioral/observerDesign/pom.xml" />
+        <option value="$PROJECT_DIR$/2026/design-patterns-2026/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/2026/1.Basics/0_OOPS/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
