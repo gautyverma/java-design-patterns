@@ -210,29 +210,35 @@ unexpected behavior.
 
 **BadImpl/Bird.java**
 
-    public class Bird {
-        public void fly() {
-            System.out.println("Bird is flying");
-        }
+```java
+public class Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
     }
+}
+```
 
 **BadImpl/Ostrich.java**
 
-    public class Ostrich extends Bird {
-        @Override
-        public void fly() {
-            throw new UnsupportedOperationException("Ostrich can't fly");
-        }
+```java
+public class Ostrich extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Ostrich can't fly");
     }
+}
+```
 
 **Usage**
 
-    public class Main {
-        public static void main(String[] args) {
-            Bird bird = new Ostrich();
-            bird.fly(); // Runtime error ❌
-        }
+```java
+public class Main {
+    public static void main(String[] args) {
+        Bird bird = new Ostrich();
+        bird.fly(); // Runtime error ❌
     }
+}
+```
 
 **Problems:**
 
@@ -247,42 +253,316 @@ unexpected behavior.
 
 ### Class Hierarchy (Good Design)
 
-    Bird (abstract)
-    ├── FlyingBird (abstract)
-    │     └── Sparrow
-    └── Ostrich
+```
+Bird (abstract)
+├── FlyingBird (abstract)
+│     └── Sparrow
+└── Ostrich
+```
 
 **GoodImpl/Bird.java**
 
-    public abstract class Bird {
-    }
+```java
+public abstract class Bird {
+}
+```
 
 **GoodImpl/FlyingBird.java**
 
-    public abstract class FlyingBird extends Bird {
-        public void fly() {
-            System.out.println("Flying...");
-        }
+```java
+public abstract class FlyingBird extends Bird {
+    public void fly() {
+        System.out.println("Flying...");
     }
+}
+```
 
 **GoodImpl/Sparrow.java**
 
-    public class Sparrow extends FlyingBird {
-    }
+```java
+public class Sparrow extends FlyingBird {
+}
+```
 
 **GoodImpl/Ostrich.java**
 
-    public class Ostrich extends Bird {
-        // No fly method ✅
-    }
+```java
+public class Ostrich extends Bird {
+    // No fly method ✅
+}
+```
 
 **Usage**
 
-    public class Main {
-        public static void main(String[] args) {
-            FlyingBird bird = new Sparrow();
-            bird.fly(); // Works fine ✅
-        }
+```java
+public class Main {
+    public static void main(String[] args) {
+        FlyingBird bird = new Sparrow();
+        bird.fly(); // Works fine ✅
     }
+}
+```
 
 ---
+
+## **Interface Segregation Principle (ISP)**
+
+### What is ISP?
+
+Clients should not be forced to depend on methods they do not use. Prefer many specific interfaces over one general-purpose interface.
+
+---
+
+### Bad Implementation (Violates ISP)
+
+**Problem:** A single interface with multiple responsibilities forces all implementers to provide implementations for methods they don't need.
+
+**BadImpl/Worker.java**
+
+```java
+public interface Worker {
+    void work();
+    void eat();
+}
+```
+
+**BadImpl/HumanWorker.java**
+
+```java
+public class HumanWorker implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Human is working");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Human is eating");
+    }
+}
+```
+
+**BadImpl/RobotWorker.java**
+
+```java
+public class RobotWorker implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Robot is working");
+    }
+
+    @Override
+    public void eat() {
+        throw new UnsupportedOperationException("Robot can't eat");
+    }
+}
+```
+
+**Problems:**
+
+- Robots are forced to implement eat(), leading to runtime errors or empty implementations
+- Violates ISP by making interfaces too broad
+- Hard to maintain and extend
+
+---
+
+### Good Implementation (Follows ISP)
+
+### 💡 Approach
+
+- Split the interface into smaller, more specific interfaces
+- Clients implement only the interfaces they need
+
+---
+
+**GoodImpl/Workable.java**
+
+```java
+public interface Workable {
+    void work();
+}
+```
+
+**GoodImpl/Eatable.java**
+
+```java
+public interface Eatable {
+    void eat();
+}
+```
+
+**GoodImpl/HumanWorker.java**
+
+```java
+public class HumanWorker implements Workable, Eatable {
+    @Override
+    public void work() {
+        System.out.println("Human is working");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Human is eating");
+    }
+}
+```
+
+**GoodImpl/RobotWorker.java**
+
+```java
+public class RobotWorker implements Workable {
+    @Override
+    public void work() {
+        System.out.println("Robot is working");
+    }
+}
+```
+
+**Usage**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Workable human = new HumanWorker();
+        human.work(); // Human is working
+
+        Workable robot = new RobotWorker();
+        robot.work(); // Robot is working
+
+        Eatable eater = new HumanWorker();
+        eater.eat(); // Human is eating
+    }
+}
+```
+
+### Key Idea
+
+Separate interfaces → Clients depend only on what they use
+Achieves better decoupling and flexibility
+
+---
+
+## **Dependency Inversion Principle (DIP)**
+
+### What is DIP?
+
+High-level modules should not depend on low-level modules. Both should depend on abstractions (interfaces).
+
+Abstractions should not depend on details. Details should depend on abstractions.
+
+---
+
+### Bad Implementation (Violates DIP)
+
+**Problem:** High-level module (NotificationManager) directly depends on low-level module (EmailService)
+
+**BadImpl/EmailService.java**
+
+```java
+public class EmailService {
+    public void sendEmail(String message) {
+        System.out.println("Sending email: " + message);
+    }
+}
+```
+
+**BadImpl/NotificationManager.java**
+
+```java
+public class NotificationManager {
+    private EmailService emailService;
+
+    public NotificationManager() {
+        this.emailService = new EmailService(); // Direct dependency
+    }
+
+    public void notifyUser(String message) {
+        emailService.sendEmail(message);
+    }
+}
+```
+
+**Problems:**
+
+- Tight coupling between NotificationManager and EmailService
+- Hard to test NotificationManager without EmailService
+- Difficult to change notification method (e.g., add SMS)
+
+
+---
+
+### Good Implementation (Follows DIP)
+
+### 💡 Approach
+
+- Introduce abstraction (interface)
+- Both high-level and low-level modules depend on the abstraction
+
+---
+
+**GoodImpl/NotificationService.java**
+
+```java
+public interface NotificationService {
+    void sendNotification(String message);
+}
+```
+
+**GoodImpl/EmailNotification.java**
+
+```java
+public class EmailNotification implements NotificationService {
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Sending email: " + message);
+    }
+}
+```
+
+**GoodImpl/SMSNotification.java**
+
+```java
+public class SMSNotification implements NotificationService {
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Sending SMS: " + message);
+    }
+}
+```
+
+**GoodImpl/NotificationManager.java**
+
+```java
+public class NotificationManager {
+    private NotificationService notificationService;
+
+    public NotificationManager(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
+    public void notifyUser(String message) {
+        notificationService.sendNotification(message);
+    }
+}
+```
+
+**Usage**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        NotificationService emailService = new EmailNotification();
+        NotificationManager manager = new NotificationManager(emailService);
+        manager.notifyUser("Hello via Email"); // Sending email: Hello via Email
+
+        NotificationService smsService = new SMSNotification();
+        NotificationManager smsManager = new NotificationManager(smsService);
+        smsManager.notifyUser("Hello via SMS"); // Sending SMS: Hello via SMS
+    }
+}
+```
+
+
+### Key Idea
+
+Depend on abstractions → Loose coupling, easy to test and extend
