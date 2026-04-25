@@ -1,3 +1,3 @@
-package a2_SolidPrinciples.a3_ISP.goodImpl;
+package a2_SolidPrinciples.a3_LSP.goodImpl;
 
 public class ReadOnlyFile extends ReadableFile {}

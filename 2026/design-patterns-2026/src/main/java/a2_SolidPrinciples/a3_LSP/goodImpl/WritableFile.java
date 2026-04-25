@@ -1,4 +1,4 @@
-package a2_SolidPrinciples.a3_ISP.goodImpl;
+package a2_SolidPrinciples.a3_LSP.goodImpl;
 
 public class WritableFile extends ReadableFile implements Writable {
   @Override

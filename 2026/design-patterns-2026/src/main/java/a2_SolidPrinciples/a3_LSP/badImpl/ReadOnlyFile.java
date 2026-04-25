@@ -1,4 +1,4 @@
-package a2_SolidPrinciples.a3_ISP.badImpl;
+package a2_SolidPrinciples.a3_LSP.badImpl;
 
 public class ReadOnlyFile extends File {
   public void write() {
