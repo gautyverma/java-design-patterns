@@ -7,13 +7,31 @@ package a3_BehavioralPatterns.a1_Memento;
  */
 public class TextEditor {
 
-  private String content;
+  private StringBuilder content = new StringBuilder();
 
-  public void write(String text) {
-    this.content = text;
+  // Append text
+  public void append(String text) {
+    content.append(text);
+  }
+
+  // Save current state
+  public EditorMemento save() {
+    String snapshot = content.toString();
+    System.out.println(" Saving: " + snapshot);
+    return new EditorMemento(snapshot);
+  }
+
+  // Restore previous state
+  public void restore(EditorMemento memento) {
+    if (memento == null) {
+      System.out.println("Nothing to restore!");
+      return;
+    }
+    content = new StringBuilder(memento.getContent());
+    System.out.println("Restored to: " + content);
   }
 
   public String getContent() {
-    return content;
+    return content.toString();
   }
 }
