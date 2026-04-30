@@ -1,4 +1,4 @@
-package a3_BehavioralPatterns.a2_Observer;
+package a3_BehavioralPatterns.a2_ObserverPattern;
 
 class DisplayDevice {
   public void showTemp(float temp) {

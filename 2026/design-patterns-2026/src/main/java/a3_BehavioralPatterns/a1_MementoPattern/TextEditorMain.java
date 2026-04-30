@@ -1,4 +1,4 @@
-package a3_BehavioralPatterns.a1_Memento;
+package a3_BehavioralPatterns.a1_MementoPattern;
 
 public class TextEditorMain {
 

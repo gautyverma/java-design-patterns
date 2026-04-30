@@ -1,4 +1,4 @@
-package a3_BehavioralPatterns.a1_Memento;
+package a3_BehavioralPatterns.a1_MementoPattern;
 
 /**
  * A text editor that allows users to undo changes such as text addition,deletion or formating . The
