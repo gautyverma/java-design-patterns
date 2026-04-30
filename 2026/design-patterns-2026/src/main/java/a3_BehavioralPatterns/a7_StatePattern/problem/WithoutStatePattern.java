@@ -1,4 +1,4 @@
-package a3_BehavioralPatterns.a7_StatePattern;
+package a3_BehavioralPatterns.a7_StatePattern.problem;
 
 public class WithoutStatePattern {
   public static void main(String[] args) {
