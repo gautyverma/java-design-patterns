@@ -72,63 +72,6 @@ class MySQLConnection extends DatabaseConnection {
 }
 ```
 
----
-
-### 3. Abstract Factory Pattern
-Provides an interface for creating **families of related or dependent objects** without specifying their concrete classes.
-
-**Characteristics:**
-- Creates groups of related objects (product families)
-- Uses multiple factory methods
-- Often uses composition instead of inheritance
-- Higher level of abstraction than Factory Method
-
-**Key Components:**
-- **AbstractFactory:** Interface for creating families of products
-- **ConcreteFactory:** Implements factory methods for specific families
-- **AbstractProduct:** Interface for product families
-- **ConcreteProduct:** Specific implementations
-
-**Benefits:**
-- Ensures consistency between related products
-- Isolates concrete classes
-- Simplifies adding new product families
-- Promotes loose coupling
-
-**Example:**
-```java
-interface UIFactory {
-    Button createButton();
-    ScrollBar createScrollBar();
-}
-
-class WindowsUIFactory implements UIFactory {
-    @Override
-    public Button createButton() {
-        return new WindowsButton();
-    }
-    
-    @Override
-    public ScrollBar createScrollBar() {
-        return new WindowsScrollBar();
-    }
-}
-```
-
----
-
-## Comparison: Simple Factory vs Factory Method vs Abstract Factory
-
-| Feature | Simple Factory | Factory Method | Abstract Factory |
-|---------|---|---|---|
-| Number of Products | Single product type | Single product family | Multiple product families |
-| Creation Method | Class method | Instance method (polymorphic) | Multiple factory methods |
-| Extensibility | Violates OCP | Follows OCP | Follows OCP |
-| Complexity | Low | Medium | High |
-| Use Case | Simple object creation | Creating related products in subclasses | Creating families of products |
-| Design Pattern? | No (Programming Idiom) | Yes (GoF Pattern) | Yes (GoF Pattern) |
-
----
 
 ## When to Use Factory Patterns
 
@@ -141,11 +84,6 @@ class WindowsUIFactory implements UIFactory {
 - You want subclasses to decide which class to instantiate
 - The number of product types may increase in future
 - You want to avoid tight coupling to concrete classes
-
-**Use Abstract Factory when:**
-- You need to create families of related objects
-- You want to ensure consistency between related products
-- You need to support multiple product family variations (e.g., UI themes)
 
 ---
 
@@ -232,28 +170,6 @@ class TransportFactory {
 }
 ```
 
-### Example 3: UI Components (Abstract Factory)
-```java
-interface UIFactory {
-    Button createButton();
-    ScrollBar createScrollBar();
-}
-
-class WindowsUIFactory implements UIFactory {
-    @Override
-    public Button createButton() {
-        return new WindowsButton();
-    }
-    
-    @Override
-    public ScrollBar createScrollBar() {
-        return new WindowsScrollBar();
-    }
-}
-```
-
----
-
 ## Best Practices
 
 1. **Use Interfaces:** Define contracts for factories and products using interfaces
@@ -264,26 +180,3 @@ class WindowsUIFactory implements UIFactory {
 6. **Dependency Injection:** Consider using DI frameworks for automatic factory selection
 
 ---
-
-## Common Mistakes to Avoid
-
-❌ **Don't:** Use factory pattern for everything
-✅ **Do:** Use it only when you have complex object creation needs
-
-❌ **Don't:** Mix factory logic with business logic
-✅ **Do:** Keep factory logic separate and focused
-
-❌ **Don't:** Create factories without considering future extensibility
-✅ **Do:** Design factories with Open/Closed Principle in mind
-
----
-
-## Conclusion
-
-The Factory Design Pattern is essential for writing maintainable, scalable, and loosely coupled code. Choose the appropriate factory variant based on your specific needs:
-- **Simple Factory:** Quick and simple scenarios
-- **Factory Method:** Single product family with subclass variations
-- **Abstract Factory:** Multiple related product families
-
-Use it wisely to enhance code quality without over-engineering your solution.
-
